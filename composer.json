@@ -1,0 +1,53 @@
+{
+    "name": "orlyapps/laravel-github-changelog",
+    "description": "Generates a changelog based on github commits",
+    "keywords": [
+        "orlyapps",
+        "laravel-github-changelog"
+    ],
+    "homepage": "https://github.com/orlyapps/laravel-github-changelog",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Florian Strauß",
+            "email": "info@orlyapps.de",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4",
+        "illuminate/support": "^7.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.0",
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Orlyapps\\LaravelGithubChangelog\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Orlyapps\\LaravelGithubChangelog\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Orlyapps\\LaravelGithubChangelog\\LaravelGithubChangelogServiceProvider"
+            ],
+            "aliases": {
+                "LaravelGithubChangelog": "Orlyapps\\LaravelGithubChangelog\\LaravelGithubChangelogFacade"
+            }
+        }
+    }
+}
