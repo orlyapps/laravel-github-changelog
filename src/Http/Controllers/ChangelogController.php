@@ -14,6 +14,6 @@ class ChangelogController
         if (file_exists(base_path('HISTORY.md'))) {
             $history = Markdown::parse(file_get_contents(base_path('HISTORY.md')))->toHtml();
         }
-        return view('laravel-github-changelog::index', compact('changelog', 'history'));
+        return view('github-changelog::index', compact('changelog', 'history'));
     }
 }

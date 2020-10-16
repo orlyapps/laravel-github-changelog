@@ -9,12 +9,12 @@ class LaravelGithubChangelog
     public function changelog()
     {
         return collect(
-            Http::withHeaders(['Authorization' => 'token ' . config('laravel-github-changelog.github.token')])
+            Http::withHeaders(['Authorization' => 'token ' . config('github-changelog.github.token')])
                 ->get(
                     'https://api.github.com/repos/' .
-                    config('laravel-github-changelog.github.user') . '/' .
-                    config('laravel-github-changelog.github.repo') . '/commits?since=' .
-                    config('laravel-github-changelog.github.since')
+                    config('github-changelog.github.user') . '/' .
+                    config('github-changelog.github.repo') . '/commits?since=' .
+                    config('github-changelog.github.since')
                 )
                 ->json()
         )->map(function ($commit) {
@@ -22,7 +22,7 @@ class LaravelGithubChangelog
             if (count($matches) < 3) {
                 return null;
             }
-            $mapping = config('laravel-github-changelog.types');
+            $mapping = config('github-changelog.types');
             return [
                 'author' => $commit['commit']['author']['name'],
                 'date' => new \DateTime($commit['commit']['author']['date']),
