@@ -2,10 +2,32 @@
 
 namespace Orlyapps\LaravelGithubChangelog;
 
+use Carbon\Carbon;
+use Illuminate\Mail\Markdown;
 use Illuminate\Support\Facades\Http;
 
 class LaravelGithubChangelog
 {
+    public function releases()
+    {
+        return collect(
+            Http::withHeaders(['Authorization' => 'token ' . config('github-changelog.github.token')])
+                ->get(
+                    'https://api.github.com/repos/' .
+                    config('github-changelog.github.user') . '/' .
+                    config('github-changelog.github.repo') . '/releases'
+                )
+                ->json()
+        )->map(function ($release) {
+            return [
+                'name' => $release['name'],
+                'created_at' => Carbon::parse($release['created_at'])->diffForHumans(),
+                'body' => Markdown::parse($release['body'])->toHtml(),
+            ];
+        })
+        ->filter(fn ($release) => !empty($release['name']));
+    }
+
     public function changelog()
     {
         return collect(
