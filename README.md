@@ -12,6 +12,18 @@ composer require orlyapps/laravel-github-changelog
 php artisan vendor:publish --provider="Orlyapps\LaravelGithubChangelog\LaravelGithubChangelogServiceProvider" --tag="config"
 ```
 
+### Update Config
+```php
+
+return [
+    'github' => [
+        'user' => '', // Github User
+        'repo' => '', // Repository Name
+        'token' => '', // Github Personal Access Token: https://github.com/settings/tokens
+        'since' => '2020-10-13'
+    ],
+];    
+```
 ## Usage
 
 https:///yourproject.com/changelog
