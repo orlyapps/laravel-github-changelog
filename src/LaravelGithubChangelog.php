@@ -35,7 +35,7 @@ class LaravelGithubChangelog
                 ->get(
                     'https://api.github.com/repos/' .
                     config('github-changelog.github.user') . '/' .
-                    config('github-changelog.github.repo') . '/commits?since=' .
+                    config('github-changelog.github.repo') . '/commits?per_page=100&since=' .
                     config('github-changelog.github.since')
                 )
                 ->json()
